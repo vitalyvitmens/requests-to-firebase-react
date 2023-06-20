@@ -3,6 +3,7 @@ import styles from './app.module.css'
 
 import {
 	useRequestAddVacuumCleaner,
+	useRequestAddHairDryer,
 	useRequestDeleteHairDryer,
 	useRequestGetProducts,
 	useRequestUpdateSmartphone,
@@ -14,8 +15,11 @@ export const App = () => {
 
 	const { isLoading, products } = useRequestGetProducts()
 
-	const { isCreating, requestAddVacuumCleaner } =
+	const { isCreatingVacuumCleaner, requestAddVacuumCleaner } =
 		useRequestAddVacuumCleaner(refreshProducts)
+
+	const { isCreatingHairDryer, requestAddHairDryer } =
+		useRequestAddHairDryer(refreshProducts)
 
 	const { isUpdating, requestUpdateSmartphone } =
 		useRequestUpdateSmartphone(refreshProducts)
@@ -34,8 +38,14 @@ export const App = () => {
 					</div>
 				))
 			)}
-			<button disabled={isCreating} onClick={requestAddVacuumCleaner}>
+			<button
+				disabled={isCreatingVacuumCleaner}
+				onClick={requestAddVacuumCleaner}
+			>
 				Добавить пылесос
+			</button>
+			<button disabled={isCreatingHairDryer} onClick={requestAddHairDryer}>
+				Добавить фен
 			</button>
 			<button disabled={isUpdating} onClick={requestUpdateSmartphone}>
 				Обновить смартфон
